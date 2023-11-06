@@ -11,7 +11,7 @@ penguins_df = pd.read_csv('C:\\Users\\moniq\\Desktop\\Comp 472\\Assignment1\\A1\
 # Convert "island" and "sex" into 1-hot encoded vectors
 penguins_df = pd.get_dummies(penguins_df, columns=["island", "sex"])
 
-# Display basic information about the penguins dataset
+# Display information about the penguins dataset
 print("Penguins Dataset:")
 print(penguins_df.info())
 print(penguins_df.columns)
@@ -20,7 +20,7 @@ print(penguins_df.columns)
 label_encoder = LabelEncoder()
 abalone_df["Type"] = label_encoder.fit_transform(abalone_df["Type"])
 
-# Display basic information about the abalone dataset
+# Display information about the abalone dataset
 print("\nAbalone Dataset:")
 print(abalone_df.info())
 
