@@ -2,6 +2,7 @@ from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
 
 # Load the abalone dataset
 abalone_df = pd.read_csv('abalone.csv')
@@ -38,6 +39,8 @@ print(penguins_df.info())
 # Display information about the abalone dataset
 print("\nAbalone Dataset:")
 print(abalone_df.info())
+
+'''Step 2'''
 #
 # # Get the percentage of instances in each output class - penguins:
 # plt.style.use('bmh')
@@ -87,4 +90,24 @@ print(abalone_df.info())
 #     plt.ylabel('Percentage')
 #
 #     plt.savefig('abalone-classes/' + col_name + '.png', bbox_inches='tight')
+
+'''Step 3'''
+#Use train-test-split to split all three datasets using default parameter values
+#Split the hot-encoded penguins dataset
+penguins_HE_df_X=penguins_HotEncoded_df[['culmen_length_mm','culmen_depth_mm','flipper_length_mm','body_mass_g','island_Biscoe','island_Dream','island_Torgersen','sex_FEMALE','sex_MALE']]
+penguins_HE_df_y=penguins_HotEncoded_df[['species']]
+
+penguins_HE_df_X_train, penguins_HE_df_X_test, penguins_HE_df_y_train, penguins_HE_df_y_test=train_test_split(penguins_HE_df_X,penguins_HE_df_y)
+
+#Split the label-encoded (manually-categorized) peguins dataset
+penguins_LE_df_X=penguins_df[['island','culmen_length_mm','culmen_depth_mm','flipper_length_mm','body_mass_g','sex']]
+penguins_LE_df_y=penguins_df[['species']]
+
+penguins_LE_df_X_train, penguins_LE_df_X_test, penguins_LE_df_y_train, penguins_LE_df_y_test=train_test_split(penguins_LE_df_X,penguins_LE_df_y)
+
+#Split the abalone dataset
+abalone_df_X=abalone_df[['LongestShell','Diameter','Height','WholeWeight','ShuckedWeight','VisceraWeight','ShellWeight','Rings']]
+abalone_df_y=abalone_df[['Type']]
+
+abalone_df_X_train, abalone_df_X_test, abalone_df_y_train, abalone_df_y_test=train_test_split(abalone_df_X,abalone_df_y)
 
