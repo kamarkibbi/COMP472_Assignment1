@@ -156,7 +156,14 @@ visualize_decision_tree(base_dt, penguins_LE_df_X_train, penguins_LE_df_y_train)
 visualize_decision_tree(best_dt, penguins_LE_df_X_train, penguins_LE_df_y_train)
 
 # Create and fit a Multi-Layer Perceptron (MLP) classifier with default parameters
-base_mlp = MLPClassifier(hidden_layer_sizes=(100, 100), activation='logistic', solver='sgd')
+base_mlp = MLPClassifier(
+    hidden_layer_sizes=(100, 100),  
+    activation='logistic',
+    solver='sgd',
+    max_iter=2000,  
+    learning_rate='constant',  
+    learning_rate_init=0.01  
+)
 base_mlp.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
 
 # Define hyperparameter grid for GridSearchCV
