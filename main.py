@@ -3,6 +3,10 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import plot_tree
+from sklearn.model_selection import GridSearchCV
+from sklearn.neural_network import MLPClassifier
 
 # Load the abalone dataset
 abalone_df = pd.read_csv('abalone.csv')
@@ -110,4 +114,69 @@ abalone_df_X=abalone_df[['LongestShell','Diameter','Height','WholeWeight','Shuck
 abalone_df_y=abalone_df[['Type']]
 
 abalone_df_X_train, abalone_df_X_test, abalone_df_y_train, abalone_df_y_test=train_test_split(abalone_df_X,abalone_df_y)
+
+'''Step 4'''
+# for the label-encoded peguins dataset
+# Create and fit a Decision Tree classifier with default parameters
+base_dt = DecisionTreeClassifier()
+base_dt.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
+
+# Define hyperparameter grid for GridSearchCV
+param_grid = {
+    'criterion': ['gini', 'entropy'],
+    'max_depth': [None, 5, 10], 
+    'min_samples_split': [2, 5, 10]  
+}
+
+
+# Create a Decision Tree classifier
+top_dt = DecisionTreeClassifier()
+
+# Perform grid search
+grid_search = GridSearchCV(top_dt, param_grid, cv=5)
+grid_search.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
+
+# Get the best parameters
+best_params = grid_search.best_params_
+
+# Create and fit a Decision Tree classifier with the best parameters
+best_dt = DecisionTreeClassifier(**best_params)
+best_dt.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
+
+
+def visualize_decision_tree(dt_model, X_train, y_train):
+    plt.figure(figsize=(12, 8))
+    plot_tree(dt_model, feature_names=X_train.columns, class_names=y_train['species'].unique(), filled=True)
+    plt.show()
+
+# Visualize the base Decision Tree
+visualize_decision_tree(base_dt, penguins_LE_df_X_train, penguins_LE_df_y_train)
+
+# Visualize the best Decision Tree found using GridSearchCV
+visualize_decision_tree(best_dt, penguins_LE_df_X_train, penguins_LE_df_y_train)
+
+# Create and fit a Multi-Layer Perceptron (MLP) classifier with default parameters
+base_mlp = MLPClassifier(hidden_layer_sizes=(100, 100), activation='logistic', solver='sgd')
+base_mlp.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
+
+# Define hyperparameter grid for GridSearchCV
+mlp_param_grid = {
+    'activation': ['logistic', 'tanh', 'relu'],
+    'hidden_layer_sizes': [(30, 50), (10, 10, 10)],  
+    'solver': ['adam', 'sgd']
+}
+
+# Create an MLP classifier
+top_mlp = MLPClassifier()
+
+# Perform grid search
+mlp_grid_search = GridSearchCV(top_mlp, mlp_param_grid, cv=5)
+mlp_grid_search.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
+
+# Get the best parameters
+mlp_best_params = mlp_grid_search.best_params_
+
+# Create and fit an MLP classifier with the best parameters
+best_mlp = MLPClassifier(**mlp_best_params)
+best_mlp.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
 
