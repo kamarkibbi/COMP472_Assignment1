@@ -8,41 +8,23 @@ from sklearn.tree import plot_tree
 from sklearn.model_selection import GridSearchCV
 from sklearn.neural_network import MLPClassifier
 
-# Load the abalone dataset
-abalone_df = pd.read_csv('abalone.csv')
-
 # Load the penguins dataset
 penguins_df = pd.read_csv('penguins.csv')
 
 # Display the first few rows of the DataFrames
-print(abalone_df.head())
 print(penguins_df.head())
 
 '''Step 1''' 
-#hot-encoded island and sex of the penguins dataset
-cols = ['island', 'sex']
-penguins_HotEncoded_df=pd.get_dummies(penguins_df,columns=cols)
-print(penguins_HotEncoded_df.head())
-
 
 #Manually categorize island and sex of the penguins dataset using label encoder
 label_encoder = LabelEncoder()
 penguins_df[["island", "sex"]] = penguins_df[["island", "sex"]].apply(label_encoder.fit_transform)
 
-#no need to encode anything from the abalone dataset
-
-
-# Display information about the penguins hot-encoded dataset
-print("\nPenguins hot-encoded Dataset information:")
-print(penguins_HotEncoded_df.info())
 
 # Display information about the penguins label encoded dataset
 print("\nPenguins label-encoded Dataset information:")
 print(penguins_df.info())
 
-# Display information about the abalone dataset
-print("\nAbalone Dataset:")
-print(abalone_df.info())
 
 '''Step 2'''
 #
@@ -97,11 +79,6 @@ print(abalone_df.info())
 
 '''Step 3'''
 #Use train-test-split to split all three datasets using default parameter values
-#Split the hot-encoded penguins dataset
-penguins_HE_df_X=penguins_HotEncoded_df[['culmen_length_mm','culmen_depth_mm','flipper_length_mm','body_mass_g','island_Biscoe','island_Dream','island_Torgersen','sex_FEMALE','sex_MALE']]
-penguins_HE_df_y=penguins_HotEncoded_df[['species']]
-
-penguins_HE_df_X_train, penguins_HE_df_X_test, penguins_HE_df_y_train, penguins_HE_df_y_test=train_test_split(penguins_HE_df_X,penguins_HE_df_y)
 
 #Split the label-encoded (manually-categorized) peguins dataset
 penguins_LE_df_X=penguins_df[['island','culmen_length_mm','culmen_depth_mm','flipper_length_mm','body_mass_g','sex']]
@@ -109,17 +86,18 @@ penguins_LE_df_y=penguins_df[['species']]
 
 penguins_LE_df_X_train, penguins_LE_df_X_test, penguins_LE_df_y_train, penguins_LE_df_y_test=train_test_split(penguins_LE_df_X,penguins_LE_df_y)
 
-#Split the abalone dataset
-abalone_df_X=abalone_df[['LongestShell','Diameter','Height','WholeWeight','ShuckedWeight','VisceraWeight','ShellWeight','Rings']]
-abalone_df_y=abalone_df[['Type']]
-
-abalone_df_X_train, abalone_df_X_test, abalone_df_y_train, abalone_df_y_test=train_test_split(abalone_df_X,abalone_df_y)
 
 '''Step 4'''
-# for the label-encoded peguins dataset
+
+'''Step 4a'''
 # Create and fit a Decision Tree classifier with default parameters
 base_dt = DecisionTreeClassifier()
+
+# for the label-encoded penguins dataset
 base_dt.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
+penguins_LE_df_y_pred=base_dt.predict(penguins_LE_df_X_test)
+
+'''Step 4b'''
 
 # Define hyperparameter grid for GridSearchCV
 param_grid = {
@@ -134,27 +112,35 @@ top_dt = DecisionTreeClassifier()
 
 # Perform grid search
 grid_search = GridSearchCV(top_dt, param_grid, cv=5)
+
+# for the label-encoded penguins dataset
 grid_search.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
 
 # Get the best parameters
 best_params = grid_search.best_params_
+best_estimator = grid_search.best_estimator_
 
-# Create and fit a Decision Tree classifier with the best parameters
-best_dt = DecisionTreeClassifier(**best_params)
-best_dt.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
+# for the label-encoded penguins dataset
+penguins_LE_df_y_pred=best_estimator.predict(penguins_LE_df_X_test)
 
 
 def visualize_decision_tree(dt_model, X_train, y_train):
     plt.figure(figsize=(12, 8))
-    plot_tree(dt_model, feature_names=X_train.columns, class_names=y_train['species'].unique(), filled=True)
+    plot_tree(
+        dt_model,
+        feature_names=X_train.columns.tolist(),
+        class_names=y_train['species'].unique().tolist(),
+        filled=True
+    )
     plt.show()
 
 # Visualize the base Decision Tree
 visualize_decision_tree(base_dt, penguins_LE_df_X_train, penguins_LE_df_y_train)
 
 # Visualize the best Decision Tree found using GridSearchCV
-visualize_decision_tree(best_dt, penguins_LE_df_X_train, penguins_LE_df_y_train)
+visualize_decision_tree(best_estimator, penguins_LE_df_X_train, penguins_LE_df_y_train)
 
+'''
 # Create and fit a Multi-Layer Perceptron (MLP) classifier with default parameters
 base_mlp = MLPClassifier(
     hidden_layer_sizes=(100, 100),  
@@ -166,9 +152,10 @@ base_mlp = MLPClassifier(
 )
 base_mlp.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
 
+
 # Define hyperparameter grid for GridSearchCV
 mlp_param_grid = {
-    'activation': ['logistic', 'tanh', 'relu'],
+    'activation': ['sigmoid', 'tanh', 'relu'],
     'hidden_layer_sizes': [(30, 50), (10, 10, 10)],  
     'solver': ['adam', 'sgd']
 }
@@ -186,4 +173,6 @@ mlp_best_params = mlp_grid_search.best_params_
 # Create and fit an MLP classifier with the best parameters
 best_mlp = MLPClassifier(**mlp_best_params)
 best_mlp.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
+
+'''
 
