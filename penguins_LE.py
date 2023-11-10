@@ -140,23 +140,28 @@ visualize_decision_tree(base_dt, penguins_LE_df_X_train, penguins_LE_df_y_train)
 # Visualize the best Decision Tree found using GridSearchCV
 visualize_decision_tree(best_estimator, penguins_LE_df_X_train, penguins_LE_df_y_train)
 
-'''
+'''Step 4c'''
 # Create and fit a Multi-Layer Perceptron (MLP) classifier with default parameters
 base_mlp = MLPClassifier(
     hidden_layer_sizes=(100, 100),  
     activation='logistic',
-    solver='sgd',
-    max_iter=2000,  
-    learning_rate='constant',  
-    learning_rate_init=0.01  
+    solver='sgd', 
 )
-base_mlp.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
 
+#Need to convert the target y column of values to an array (otherwise an error occurs)
+penguins_HE_df_y_train = penguins_HE_df_y_train.values.ravel()
+penguins_HE_df_y_test = penguins_HE_df_y_test.values.ravel()
 
+#Train the model
+base_mlp.fit(penguins_HE_df_X_train, penguins_HE_df_y_train)
+#Test the model
+penguins_HE_df_y_pred=base_mlp.predict(penguins_HE_df_X_test)
+
+'''Step 4d'''
 # Define hyperparameter grid for GridSearchCV
-mlp_param_grid = {
-    'activation': ['sigmoid', 'tanh', 'relu'],
-    'hidden_layer_sizes': [(30, 50), (10, 10, 10)],  
+mlp_param_grid ={
+    'hidden_layer_sizes':[(30, 50), (10, 10, 10)], 
+    'activation':['logistic', 'tanh', 'relu'], #Logistic = Sigmoid
     'solver': ['adam', 'sgd']
 }
 
@@ -165,14 +170,12 @@ top_mlp = MLPClassifier()
 
 # Perform grid search
 mlp_grid_search = GridSearchCV(top_mlp, mlp_param_grid, cv=5)
-mlp_grid_search.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
+mlp_grid_search.fit(penguins_HE_df_X_train, penguins_HE_df_y_train)
 
 # Get the best parameters
 mlp_best_params = mlp_grid_search.best_params_
+mlp_best_estimator = mlp_grid_search.best_estimator_
 
-# Create and fit an MLP classifier with the best parameters
-best_mlp = MLPClassifier(**mlp_best_params)
-best_mlp.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
-
-'''
+# Test the hot-encoded penguins dataset
+penguins_HE_df_y_pred=mlp_best_estimator.predict(penguins_HE_df_X_test)
 
