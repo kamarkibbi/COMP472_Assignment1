@@ -179,3 +179,6 @@ mlp_best_estimator = mlp_grid_search.best_estimator_
 # Test the hot-encoded penguins dataset
 penguins_HE_df_y_pred=mlp_best_estimator.predict(penguins_HE_df_X_test)
 
+with open('penguins.txt','a') as file:
+    file.write("The below was generated using the Label-Encoded Penguins Dataset\n")
+
