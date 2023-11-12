@@ -1,3 +1,4 @@
+
 from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
@@ -82,11 +83,11 @@ print(penguins_df.info())
 #Use train-test-split to split all three datasets using default parameter values
 
 #Split the label-encoded (manually-categorized) peguins dataset
-penguins_LE_df_X=penguins_df[['island','culmen_length_mm','culmen_depth_mm','flipper_length_mm','body_mass_g','sex']]
-penguins_LE_df_y=penguins_df[['species']]
+df_X=penguins_df[['island','culmen_length_mm','culmen_depth_mm','flipper_length_mm','body_mass_g','sex']]
+df_y=penguins_df[['species']]
 
-penguins_LE_df_X_train, penguins_LE_df_X_test, penguins_LE_df_y_train, penguins_LE_df_y_test=train_test_split(penguins_LE_df_X,penguins_LE_df_y)
 
+X_train, X_test, y_train, y_test = train_test_split(df_X, df_y)
 
 '''Step 4'''
 
@@ -95,8 +96,8 @@ penguins_LE_df_X_train, penguins_LE_df_X_test, penguins_LE_df_y_train, penguins_
 base_dt = DecisionTreeClassifier()
 
 # for the label-encoded penguins dataset
-base_dt.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
-penguins_LE_df_y_pred=base_dt.predict(penguins_LE_df_X_test)
+base_dt.fit(X_train, y_train)
+y_pred_base_dt=base_dt.predict(X_test)
 
 '''Step 4b'''
 
@@ -115,14 +116,14 @@ top_dt = DecisionTreeClassifier()
 grid_search = GridSearchCV(top_dt, param_grid, cv=5)
 
 # for the label-encoded penguins dataset
-grid_search.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
+grid_search.fit(X_train, y_train)
 
 # Get the best parameters
-best_params = grid_search.best_params_
-best_estimator = grid_search.best_estimator_
+best_params_dt = grid_search.best_params_
+best_estimator_dt = grid_search.best_estimator_
 
 # for the label-encoded penguins dataset
-penguins_LE_df_y_pred=best_estimator.predict(penguins_LE_df_X_test)
+y_pred_top_dt=best_estimator_dt.predict(X_test)
 
 
 def visualize_decision_tree(dt_model, X_train, y_train):
@@ -136,10 +137,10 @@ def visualize_decision_tree(dt_model, X_train, y_train):
     plt.show()
 
 # Visualize the base Decision Tree
-visualize_decision_tree(base_dt, penguins_LE_df_X_train, penguins_LE_df_y_train)
+visualize_decision_tree(base_dt, X_train, y_train)
 
 # Visualize the best Decision Tree found using GridSearchCV
-visualize_decision_tree(best_estimator, penguins_LE_df_X_train, penguins_LE_df_y_train)
+visualize_decision_tree(best_estimator_dt, X_train, y_train)
 
 '''Step 4c'''
 # Create and fit a Multi-Layer Perceptron (MLP) classifier with default parameters
@@ -150,13 +151,13 @@ base_mlp = MLPClassifier(
 )
 
 # Convert the target y column of values to an array
-penguins_LE_df_y_train = penguins_LE_df_y_train.values.ravel()
-penguins_LE_df_y_test = penguins_LE_df_y_test.values.ravel()
+y_train = y_train.values.ravel()
+y_test = y_test.values.ravel()
 
 # Train the model
-base_mlp.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
+base_mlp.fit(X_train, y_train)
 # Test the model
-penguins_LE_df_y_pred = base_mlp.predict(penguins_LE_df_X_test)
+y_pred_base_mlp = base_mlp.predict(X_test)
 
 '''Step 4d'''
 # Define hyperparameter grid for GridSearchCV
@@ -171,14 +172,19 @@ top_mlp = MLPClassifier()
 
 # Perform grid search
 mlp_grid_search = GridSearchCV(top_mlp, mlp_param_grid, cv=5)
-mlp_grid_search.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
+mlp_grid_search.fit(X_train, y_train)
 
 # Get the best parameters
 mlp_best_params = mlp_grid_search.best_params_
 mlp_best_estimator = mlp_grid_search.best_estimator_
 
 # Test the labeled-encoded penguins dataset
-penguins_LE_df_y_pred = mlp_best_estimator.predict(penguins_LE_df_X_test)
+y_pred_top_mlp = mlp_best_estimator.predict(X_test)
 
 with open('penguins_le.txt', 'a') as file:
     file.write("The below was generated using the Label-Encoded Penguins Dataset\n")
+
+
+'''Step 5'''
+write_to_file('penguins_le.txt', y_test, y_pred_base_dt, y_pred_top_dt, y_pred_base_mlp, y_pred_top_mlp,
+              best_params_dt, mlp_best_params)
