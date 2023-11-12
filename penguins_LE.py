@@ -8,6 +8,7 @@ from sklearn.tree import plot_tree
 from sklearn.model_selection import GridSearchCV
 from sklearn.neural_network import MLPClassifier
 
+from write_to_file import write_to_file
 # Load the penguins dataset
 penguins_df = pd.read_csv('penguins.csv')
 
@@ -148,14 +149,14 @@ base_mlp = MLPClassifier(
     solver='sgd', 
 )
 
-#Need to convert the target y column of values to an array (otherwise an error occurs)
-penguins_HE_df_y_train = penguins_HE_df_y_train.values.ravel()
-penguins_HE_df_y_test = penguins_HE_df_y_test.values.ravel()
+# Convert the target y column of values to an array
+penguins_LE_df_y_train = penguins_LE_df_y_train.values.ravel()
+penguins_LE_df_y_test = penguins_LE_df_y_test.values.ravel()
 
-#Train the model
-base_mlp.fit(penguins_HE_df_X_train, penguins_HE_df_y_train)
-#Test the model
-penguins_HE_df_y_pred=base_mlp.predict(penguins_HE_df_X_test)
+# Train the model
+base_mlp.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
+# Test the model
+penguins_LE_df_y_pred = base_mlp.predict(penguins_LE_df_X_test)
 
 '''Step 4d'''
 # Define hyperparameter grid for GridSearchCV
@@ -170,15 +171,14 @@ top_mlp = MLPClassifier()
 
 # Perform grid search
 mlp_grid_search = GridSearchCV(top_mlp, mlp_param_grid, cv=5)
-mlp_grid_search.fit(penguins_HE_df_X_train, penguins_HE_df_y_train)
+mlp_grid_search.fit(penguins_LE_df_X_train, penguins_LE_df_y_train)
 
 # Get the best parameters
 mlp_best_params = mlp_grid_search.best_params_
 mlp_best_estimator = mlp_grid_search.best_estimator_
 
-# Test the hot-encoded penguins dataset
-penguins_HE_df_y_pred=mlp_best_estimator.predict(penguins_HE_df_X_test)
+# Test the labeled-encoded penguins dataset
+penguins_LE_df_y_pred = mlp_best_estimator.predict(penguins_LE_df_X_test)
 
-with open('penguins.txt','a') as file:
+with open('penguins_le.txt', 'a') as file:
     file.write("The below was generated using the Label-Encoded Penguins Dataset\n")
-
