@@ -1,0 +1,86 @@
+The below was generated using the Abalone Dataset
+
+*******************************************************************************
+
+(A)
+Model: Base-DT 
+Hyper-parameters changed: None 
+
+(B) 
+Confusion Matrix: 
+[[34  0  0]
+ [ 2 14  0]
+ [ 0  0 34]]
+
+(C) 
+Precision: 0.9814814814814815
+Recall: 0.9583333333333334
+F1-measure: 0.9682539682539683
+(D) 
+Accuracy: 0.9761904761904762
+Macro-Average F1: 0.9682539682539683
+Weighted-Average F1: 0.9757369614512472
+
+*******************************************************************************
+
+(A)
+Model: Top-DT using gridsearch 
+Hyper-parameters changed: 
+{'criterion': 'entropy', 'max_depth': None, 'min_samples_split': 2}
+(B) 
+Confusion Matrix: 
+[[34  0  0]
+ [ 2 14  0]
+ [ 0  0 34]]
+
+(C) 
+Precision: 0.9814814814814815
+Recall: 0.9583333333333334
+F1-measure: 0.9682539682539683
+(D) 
+Accuracy: 0.9761904761904762
+Macro-Average F1: 0.9682539682539683
+Weighted-Average F1: 0.9757369614512472
+
+*******************************************************************************
+
+(A)
+Model: Base-DT 
+Hyper-parameters changed: None 
+
+(B) 
+Confusion Matrix: 
+[[34  0  0]
+ [16  0  0]
+ [34  0  0]]
+
+(C) 
+Precision: 0.1349206349206349
+Recall: 0.3333333333333333
+F1-measure: 0.192090395480226
+(D) 
+Accuracy: 0.40476190476190477
+Macro-Average F1: 0.192090395480226
+Weighted-Average F1: 0.23325262308313158
+
+*******************************************************************************
+
+(A)
+Model: Top-DT using gridsearch 
+Hyper-parameters changed: 
+{'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
+(B) 
+Confusion Matrix: 
+[[34  0  0]
+ [16  0  0]
+ [34  0  0]]
+
+(C) 
+Precision: 0.1349206349206349
+Recall: 0.3333333333333333
+F1-measure: 0.192090395480226
+(D) 
+Accuracy: 0.40476190476190477
+Macro-Average F1: 0.192090395480226
+Weighted-Average F1: 0.23325262308313158
+
