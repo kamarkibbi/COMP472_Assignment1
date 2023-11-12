@@ -1,3 +1,4 @@
+import sklearn.metrics
 from sklearn import metrics
 from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
@@ -8,18 +9,17 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import plot_tree
 from sklearn.model_selection import GridSearchCV
 from sklearn.neural_network import MLPClassifier
-
+from write_to_file import write_to_file
 
 # Load the abalone dataset
 abalone_df = pd.read_csv('abalone.csv')
 
-
 # Display the first few rows of the DataFrames
 print(abalone_df.head())
 
-'''Step 1''' 
+'''Step 1'''
 
-#no need to encode anything from the abalone dataset
+# no need to encode anything from the abalone dataset
 
 # Display information about the abalone dataset
 print("\nAbalone Dataset:")
@@ -77,13 +77,14 @@ print(abalone_df.info())
 #     plt.savefig('abalone-classes/' + col_name + '.png', bbox_inches='tight')
 
 '''Step 3'''
-#Use train-test-split to split all three datasets using default parameter values
+# Use train-test-split to split all three datasets using default parameter values
 
-#Split the abalone dataset
-abalone_df_X=abalone_df[['LongestShell','Diameter','Height','WholeWeight','ShuckedWeight','VisceraWeight','ShellWeight','Rings']]
-abalone_df_y=abalone_df[['Type']]
+# Split the abalone dataset
+df_X = abalone_df[
+    ['LongestShell', 'Diameter', 'Height', 'WholeWeight', 'ShuckedWeight', 'VisceraWeight', 'ShellWeight', 'Rings']]
+df_y = abalone_df[['Type']]
 
-abalone_df_X_train, abalone_df_X_test, abalone_df_y_train, abalone_df_y_test=train_test_split(abalone_df_X,abalone_df_y)
+X_train, X_test, y_train, y_test = train_test_split(df_X,  df_y)
 
 '''Step 4'''
 
@@ -91,19 +92,18 @@ abalone_df_X_train, abalone_df_X_test, abalone_df_y_train, abalone_df_y_test=tra
 # Create and fit a Decision Tree classifier with default parameters
 base_dt = DecisionTreeClassifier(max_depth=5)
 
-# for the label-encoded penguins dataset
-base_dt.fit(abalone_df_X_train, abalone_df_y_train)
-abalone_df_y_pred=base_dt.predict(abalone_df_X_test)
+# for the label-encoded abalone dataset
+base_dt.fit(X_train, y_train)
+y_pred_base_dt = base_dt.predict(X_test)
 
 '''Step 4b'''
 
 # Define hyperparameter grid for GridSearchCV
 param_grid = {
     'criterion': ['gini', 'entropy'],
-    'max_depth': [None, 5, 10], 
-    'min_samples_split': [2, 5, 10]  
+    'max_depth': [None, 5, 10],
+    'min_samples_split': [2, 5, 10]
 }
-
 
 # Create a Decision Tree classifier
 top_dt = DecisionTreeClassifier()
@@ -112,32 +112,33 @@ top_dt = DecisionTreeClassifier()
 grid_search = GridSearchCV(top_dt, param_grid, cv=5)
 
 # for the abalone dataset
-grid_search.fit(abalone_df_X_train, abalone_df_y_train)
+grid_search.fit(X_train, y_train)
 
 # Get the best parameters
-best_params = grid_search.best_params_
-best_estimator = grid_search.best_estimator_
+best_params_top_dt = grid_search.best_params_
+best_estimator_top_dt = grid_search.best_estimator_
 
-# for the label-encoded penguins dataset
-penguins_LE_df_y_pred=best_estimator.predict(abalone_df_X_test)
 
-def visualize_decision_tree(dt_model, X_train, y_train):
-    plt.figure(figsize=(30, 10))
-    plot_tree(
-        dt_model,
-        feature_names=X_train.columns.tolist(),
-        class_names=y_train['Type'].unique().tolist(),
-        filled=True,
-        fontsize=3
-    )
-    plt.show()
+y_pred_top_dt = best_estimator_top_dt.predict(X_test)
 
-# Visualize the base Decision Tree
-visualize_decision_tree(base_dt, abalone_df_X_train, abalone_df_y_train)
-
-# Visualize the best Decision Tree found using GridSearchCV
-visualize_decision_tree(best_estimator, abalone_df_X_train, abalone_df_y_train)
-
+#
+# def visualize_decision_tree(dt_model, X_train, y_train):
+#     plt.figure(figsize=(30, 10))
+#     plot_tree(
+#         dt_model,
+#         feature_names=X_train.columns.tolist(),
+#         class_names=y_train['Type'].unique().tolist(),
+#         filled=True,
+#         fontsize=3
+#     )
+#     plt.show()
+#
+#
+# # Visualize the base Decision Tree
+# visualize_decision_tree(base_dt, abalone_df_X_train, abalone_df_y_train)
+#
+# # Visualize the best Decision Tree found using GridSearchCV
+# visualize_decision_tree(best_estimator, abalone_df_X_train, abalone_df_y_train)
 
 '''Step 4c'''
 # Create and fit a Multi-Layer Perceptron (MLP) classifier with default parameters
@@ -147,26 +148,20 @@ base_mlp = MLPClassifier(
     solver='sgd',
 )
 
-#Need to convert the target y column of values to an array (otherwise an error occurs)
-abalone_df_y_train = abalone_df_y_train.values.ravel()
-abalone_df_y_test = abalone_df_y_test.values.ravel()
+# Need to convert the target y column of values to an array (otherwise an error occurs)
+y_train = y_train.values.ravel()
+y_test = y_test.values.ravel()
 
-#Train the model
-base_mlp.fit(abalone_df_X_train, abalone_df_y_train)
-#Test the model
-penguins_HE_df_y_pred=base_mlp.predict(abalone_df_X_test)
-
-acu = metrics.accuracy_score(abalone_df_y_pred, abalone_df_y_test)
-cm = metrics.confusion_matrix(abalone_df_y_pred, abalone_df_y_test)
-
-print("Accuracy: " + str(acu) + "\nConfusion mactrix: " + str(cm))
-
+# Train the model
+base_mlp.fit(X_train, y_train)
+# Test the model
+y_pred_base_mlp = base_mlp.predict(X_test)
 
 '''Step 4d'''
 # Define hyperparameter grid for GridSearchCV
-mlp_param_grid ={
-    'hidden_layer_sizes':[(30, 50), (10, 10, 10)],
-    'activation':['logistic', 'tanh', 'relu'], #Logistic = Sigmoid
+mlp_param_grid = {
+    'hidden_layer_sizes': [(30, 50), (10, 10, 10)],
+    'activation': ['logistic', 'tanh', 'relu'],  # Logistic = Sigmoid
     'solver': ['adam', 'sgd']
 }
 
@@ -175,16 +170,15 @@ top_mlp = MLPClassifier()
 
 # Perform grid search
 mlp_grid_search = GridSearchCV(top_mlp, mlp_param_grid, cv=5)
-mlp_grid_search.fit(abalone_df_X_train, abalone_df_y_train)
+mlp_grid_search.fit(X_train, y_train)
 
 # Get the best parameters
 mlp_best_params = mlp_grid_search.best_params_
 mlp_best_estimator = mlp_grid_search.best_estimator_
 
 # Test the hot-encoded penguins dataset
-abalone_df_y_pred=mlp_best_estimator.predict(abalone_df_X_test)
+y_pred_top_mlp = mlp_best_estimator.predict(X_test)
 
-
-with open('abalone.txt','a') as file:
-    file.write("The below was generated using the Abalone Dataset\n")
-
+# write all the stats to a file
+write_to_file(y_test, y_pred_base_dt, y_pred_top_dt, y_pred_base_mlp, y_pred_top_mlp,
+                  best_params_top_dt, mlp_best_params)
