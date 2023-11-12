@@ -8,8 +8,10 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import plot_tree
 from sklearn.model_selection import GridSearchCV
 from sklearn.neural_network import MLPClassifier
-
+from sklearn.metrics import accuracy_score
+import numpy as np
 from write_to_file import write_to_file
+
 # Load the penguins dataset
 penguins_df = pd.read_csv('penguins.csv')
 
@@ -188,3 +190,48 @@ with open('penguins_le.txt', 'a') as file:
 '''Step 5'''
 write_to_file('penguins_le.txt', y_test, y_pred_base_dt, y_pred_top_dt, y_pred_base_mlp, y_pred_top_mlp,
               best_params_dt, mlp_best_params)
+
+'''Step 6'''
+
+#Redo steps 4 & 5, 5 times for each model and append in the performance files
+num_iterations = 5
+accuracy_results = {'base_dt': [], 'top_dt': [], 'base_mlp': [], 'top_mlp': []}
+
+for i in range(num_iterations):
+    print(f"\nIteration {i + 1}/{num_iterations}")
+
+    # Split the data
+    X_train, X_test, y_train, y_test = train_test_split(df_X, df_y)
+
+    # Base Decision Tree
+    base_dt.fit(X_train, y_train)
+    y_pred_base_dt = base_dt.predict(X_test)
+    accuracy_results['base_dt'].append(accuracy_score(y_test, y_pred_base_dt))
+
+    # Top Decision Tree
+    grid_search.fit(X_train, y_train)
+    best_estimator_dt = grid_search.best_estimator_
+    y_pred_top_dt = best_estimator_dt.predict(X_test)
+    accuracy_results['top_dt'].append(accuracy_score(y_test, y_pred_top_dt))
+
+    # Base MLP
+    y_train = y_train.values.ravel()
+    y_test = y_test.values.ravel()
+    base_mlp.fit(X_train, y_train)
+    y_pred_base_mlp = base_mlp.predict(X_test)
+    accuracy_results['base_mlp'].append(accuracy_score(y_test, y_pred_base_mlp))
+
+    # Top MLP
+    mlp_grid_search.fit(X_train, y_train)
+    mlp_best_estimator = mlp_grid_search.best_estimator_
+    y_pred_top_mlp = mlp_best_estimator.predict(X_test)
+    accuracy_results['top_mlp'].append(accuracy_score(y_test, y_pred_top_mlp))
+
+# Calculate average and variance for each model
+for model in ['base_dt', 'top_dt', 'base_mlp', 'top_mlp']:
+    avg_accuracy = np.mean(accuracy_results[model])
+    var_accuracy = np.var(accuracy_results[model])
+
+    with open('penguins_le_performance.txt', 'a') as f:
+        f.write(f"\n\nModel: {model}\n")
+        f.write(f"Average Accuracy: {avg_accuracy:.4f}, Variance: {var_accuracy:.4f}\n")
