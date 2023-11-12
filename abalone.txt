@@ -8,39 +8,39 @@ Hyper-parameters changed: None
 
 (B) 
 Confusion Matrix: 
-[[ 62  52 208]
- [ 22 267  51]
- [ 72  89 222]]
+[[138  24 145]
+ [ 40 263  51]
+ [123  58 203]]
 
 (C) 
-Precision: 0.5272727272727272
-Recall: 0.5272727272727272
-F1-measure: 0.5272727272727272
+Precision: 0.5765208437338712
+Recall: 0.5736983623640479
+F1-measure: 0.5749898211591609
 (D) 
-Accuracy: 0.5272727272727272
-Macro-Average F1: 0.4957356193819398
-Weighted-Average F1: 0.5005532037558423
+Accuracy: 0.5779904306220096
+Macro-Average F1: 0.5749898211591609
+Weighted-Average F1: 0.5788126500581771
 
 *******************************************************************************
 
 (A)
 Model: Top-DT using gridsearch 
 Hyper-parameters changed: 
-{'criterion': 'entropy', 'max_depth': 5, 'min_samples_split': 2}
+{'criterion': 'entropy', 'max_depth': 5, 'min_samples_split': 5}
 (B) 
 Confusion Matrix: 
-[[ 65  50 207]
- [ 22 257  61]
- [ 56  81 246]]
+[[137  41 129]
+ [ 43 268  43]
+ [149  58 177]]
 
 (C) 
-Precision: 0.5435406698564593
-Recall: 0.5435406698564593
-F1-measure: 0.5435406698564593
+Precision: 0.5512739764166823
+Recall: 0.5547512395179645
+F1-measure: 0.5523921106460373
 (D) 
-Accuracy: 0.5435406698564593
-Macro-Average F1: 0.5113696105982221
-Weighted-Average F1: 0.5168899799297674
+Accuracy: 0.5569377990430622
+Macro-Average F1: 0.5523921106460373
+Weighted-Average F1: 0.555866409237372
 
 *******************************************************************************
 
@@ -50,37 +50,37 @@ Hyper-parameters changed: None
 
 (B) 
 Confusion Matrix: 
-[[  0  18 304]
- [  0 170 170]
- [  0  32 351]]
+[[  0  24 283]
+ [  0 236 118]
+ [  0  48 336]]
 
 (C) 
-Precision: 0.49856459330143543
-Recall: 0.49856459330143543
-F1-measure: 0.49856459330143543
+Precision: 0.40737869096078055
+Recall: 0.5138888888888888
+F1-measure: 0.43748523338660544
 (D) 
-Accuracy: 0.49856459330143543
-Macro-Average F1: 0.39608956165247555
-Weighted-Average F1: 0.4105260894560302
+Accuracy: 0.5473684210526316
+Macro-Average F1: 0.43748523338660544
+Weighted-Average F1: 0.46181173278917964
 
 *******************************************************************************
 
 (A)
 Model: Top-DT using gridsearch 
 Hyper-parameters changed: 
-{'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
+{'activation': 'tanh', 'hidden_layer_sizes': (10, 10, 10), 'solver': 'adam'}
 (B) 
 Confusion Matrix: 
-[[ 96  34 192]
- [ 14 259  67]
- [ 76  74 233]]
+[[ 40  34 233]
+ [  5 285  64]
+ [ 42  81 261]]
 
 (C) 
-Precision: 0.5626794258373206
-Recall: 0.5626794258373206
-F1-measure: 0.5626794258373206
+Precision: 0.5466706834754665
+Recall: 0.5383551351239441
+F1-measure: 0.5043846608096653
 (D) 
-Accuracy: 0.5626794258373206
-Macro-Average F1: 0.5477324839345576
-Weighted-Average F1: 0.5500330674024125
+Accuracy: 0.5607655502392345
+Macro-Average F1: 0.5043846608096653
+Weighted-Average F1: 0.5193660922424869
 
