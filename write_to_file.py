@@ -11,9 +11,9 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.neural_network import MLPClassifier
 
 
-def write_to_file(y_test, y_pred_base_dt, y_pred_top_dt, y_pred_base_mlp, y_pred_top_mlp,
+def write_to_file(fileName, y_test, y_pred_base_dt, y_pred_top_dt, y_pred_base_mlp, y_pred_top_mlp,
                   dt_best_params, mlp_best_params):
-    with open('abalone.txt', 'w') as file:
+    with open(fileName, 'w') as file:
         file.write("The below was generated using the Abalone Dataset\n\n")
 
         confusion_matrix_base_dt = metrics.confusion_matrix(y_test, y_pred_base_dt)

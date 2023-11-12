@@ -9,6 +9,8 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.preprocessing import StandardScaler
 from sklearn.neural_network import MLPClassifier
 
+from write_to_file import write_to_file
+
 # Load the penguins dataset
 penguins_df = pd.read_csv('penguins.csv')
 
@@ -80,10 +82,10 @@ print(penguins_HotEncoded_df.info())
 '''Step 3'''
 #Use train-test-split to split all the dataset using default parameter values
 #Split the hot-encoded penguins dataset
-penguins_HE_df_X=penguins_HotEncoded_df[['culmen_length_mm','culmen_depth_mm','flipper_length_mm','body_mass_g','island_Biscoe','island_Dream','island_Torgersen','sex_FEMALE','sex_MALE']]
-penguins_HE_df_y=penguins_HotEncoded_df[['species']]
+df_X=penguins_HotEncoded_df[['culmen_length_mm','culmen_depth_mm','flipper_length_mm','body_mass_g','island_Biscoe','island_Dream','island_Torgersen','sex_FEMALE','sex_MALE']]
+df_y=penguins_HotEncoded_df[['species']]
 
-penguins_HE_df_X_train, penguins_HE_df_X_test, penguins_HE_df_y_train, penguins_HE_df_y_test=train_test_split(penguins_HE_df_X,penguins_HE_df_y)
+X_train, X_test, y_train, y_test=train_test_split(df_X,df_y)
 
 '''Step 4'''
 
@@ -92,8 +94,8 @@ penguins_HE_df_X_train, penguins_HE_df_X_test, penguins_HE_df_y_train, penguins_
 base_dt = DecisionTreeClassifier()
 
 # Train then test hot-encoded penguins dataset
-base_dt.fit(penguins_HE_df_X_train, penguins_HE_df_y_train)
-penguins_HE_df_y_pred=base_dt.predict(penguins_HE_df_X_test)
+base_dt.fit(X_train, y_train)
+y_pred_base_dt=base_dt.predict(X_test)
 
 def visualize_decision_tree(dt_model, X_train, y_train):
     plt.figure(figsize=(12, 8))
@@ -106,7 +108,7 @@ def visualize_decision_tree(dt_model, X_train, y_train):
     plt.show()
 
 # Visualize the base Decision Tree
-visualize_decision_tree(base_dt, penguins_HE_df_X_train, penguins_HE_df_y_train)
+visualize_decision_tree(base_dt, X_train, y_train)
 
 '''Step 4b'''
 
@@ -125,17 +127,17 @@ top_dt = DecisionTreeClassifier()
 grid_search = GridSearchCV(top_dt, param_grid, cv=5)
 
 # Train the hot-encoded penguins dataset
-grid_search.fit(penguins_HE_df_X_train, penguins_HE_df_y_train) 
+grid_search.fit(X_train, y_train)
 
 # Get the best parameters
-best_params = grid_search.best_params_
-best_estimator = grid_search.best_estimator_
+best_params_dt = grid_search.best_params_
+best_estimator_dt = grid_search.best_estimator_
 
 # Test the hot-encoded penguins dataset
-penguins_HE_df_y_pred=best_estimator.predict(penguins_HE_df_X_test)
+y_pred_top_dt = best_estimator_dt.predict(X_test)
 
 # Visualize the best Decision Tree found using GridSearchCV
-visualize_decision_tree(best_estimator, penguins_HE_df_X_train, penguins_HE_df_y_train)
+visualize_decision_tree(best_estimator_dt, X_train, y_train)
 
 '''Step 4c'''
 # Create and fit a Multi-Layer Perceptron (MLP) classifier with default parameters
@@ -149,13 +151,13 @@ base_mlp = MLPClassifier(
 )
 
 #Need to convert the target y column of values to an array (otherwise an error occurs)
-penguins_HE_df_y_train = penguins_HE_df_y_train.values.ravel()
-penguins_HE_df_y_test = penguins_HE_df_y_test.values.ravel()
+y_train = y_train.values.ravel()
+y_test = y_test.values.ravel()
 
 #Train the model
-base_mlp.fit(penguins_HE_df_X_train, penguins_HE_df_y_train)
+base_mlp.fit(X_train, y_train)
 #Test the model
-penguins_HE_df_y_pred=base_mlp.predict(penguins_HE_df_X_test)
+y_pred_base_mlp=base_mlp.predict(X_test)
 
 '''Step 4d'''
 # Define hyperparameter grid for GridSearchCV
@@ -170,17 +172,18 @@ top_mlp = MLPClassifier()
 
 # Perform grid search
 mlp_grid_search = GridSearchCV(top_mlp, mlp_param_grid, cv=5)
-mlp_grid_search.fit(penguins_HE_df_X_train, penguins_HE_df_y_train)
+mlp_grid_search.fit(X_train, y_train)
 
 # Get the best parameters
 mlp_best_params = mlp_grid_search.best_params_
 mlp_best_estimator = mlp_grid_search.best_estimator_
 
 # Test the hot-encoded penguins dataset
-penguins_HE_df_y_pred=mlp_best_estimator.predict(penguins_HE_df_X_test)
+y_pred_top_mlp=mlp_best_estimator.predict(X_test)
 
 '''Step 5'''
-with open('penguins.txt','a') as file:
-    file.write("The below was generated using the Hot-Encoded Penguins Dataset\n")
+write_to_file('penguins_he.txt', y_test, y_pred_base_dt, y_pred_top_dt, y_pred_base_mlp, y_pred_top_mlp,
+              best_params_dt, mlp_best_params)
+
 
 

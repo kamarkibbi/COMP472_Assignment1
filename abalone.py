@@ -84,7 +84,7 @@ df_X = abalone_df[
     ['LongestShell', 'Diameter', 'Height', 'WholeWeight', 'ShuckedWeight', 'VisceraWeight', 'ShellWeight', 'Rings']]
 df_y = abalone_df[['Type']]
 
-X_train, X_test, y_train, y_test = train_test_split(df_X,  df_y)
+X_train, X_test, y_train, y_test = train_test_split(df_X, df_y)
 
 '''Step 4'''
 
@@ -117,7 +117,6 @@ grid_search.fit(X_train, y_train)
 # Get the best parameters
 best_params_top_dt = grid_search.best_params_
 best_estimator_top_dt = grid_search.best_estimator_
-
 
 y_pred_top_dt = best_estimator_top_dt.predict(X_test)
 
@@ -180,5 +179,5 @@ mlp_best_estimator = mlp_grid_search.best_estimator_
 y_pred_top_mlp = mlp_best_estimator.predict(X_test)
 
 # write all the stats to a file
-write_to_file(y_test, y_pred_base_dt, y_pred_top_dt, y_pred_base_mlp, y_pred_top_mlp,
-                  best_params_top_dt, mlp_best_params)
+write_to_file('abalone.txt', y_test, y_pred_base_dt, y_pred_top_dt, y_pred_base_mlp, y_pred_top_mlp,
+              best_params_top_dt, mlp_best_params)
