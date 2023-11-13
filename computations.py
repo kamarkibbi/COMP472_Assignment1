@@ -135,6 +135,7 @@ def computations(fileName: str, df_X, df_y, target: str):
         # Base Decision Tree
         base_dt.fit(X_train, y_train)
         y_pred_base_dt = base_dt.predict(X_test)
+        visualize_decision_tree(base_dt, X_train, y_train)
         accuracy_results['base_dt_Acc'].append(accuracy_score(y_test, y_pred_base_dt))
         macro_f1_results['base_dt_Macf1'].append(metrics.f1_score(y_test,y_pred_base_dt,average="macro"))
         weighted_avg_f1_results['base_dt_Wavgf1'].append(metrics.f1_score(y_test, y_pred_base_dt, average="weighted"))
@@ -143,6 +144,7 @@ def computations(fileName: str, df_X, df_y, target: str):
         grid_search.fit(X_train, y_train)
         best_estimator_dt = grid_search.best_estimator_
         y_pred_top_dt = best_estimator_dt.predict(X_test)
+        visualize_decision_tree(best_estimator_dt, X_train, y_train)
         accuracy_results['top_dt_Acc'].append(accuracy_score(y_test, y_pred_top_dt))
         macro_f1_results['top_dt_Macf1'].append(metrics.f1_score(y_test,y_pred_top_dt,average="macro"))
         weighted_avg_f1_results['top_dt_Wavgf1'].append(metrics.f1_score(y_test, y_pred_top_dt, average="weighted"))

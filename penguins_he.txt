@@ -8,51 +8,51 @@ Hyper-parameters changed: None
 
 (B) 
 Confusion Matrix: 
-[[42  0  0]
- [ 1 14  0]
- [ 0  0 27]]
+[[34  0  3]
+ [ 1 16  0]
+ [ 0  0 30]]
 
 (C) 
-Precision Micro: 0.9880952380952381
-Precision Macro: 0.9922480620155039
-Precision Weighted: 0.9883720930232558
-Recall Micro: 0.9880952380952381
-Recall Macro: 0.9777777777777779
-Recall Weighted: 0.9880952380952381
-F1-measure Micro: 0.9880952380952381
-F1-measure Macro: 0.9845841784989858
-F1-measure Weighted: 0.9879600115908431
+Precision Micro: 0.9523809523809523
+Precision Macro: 0.9601731601731602
+Precision Weighted: 0.9549474335188621
+Recall Micro: 0.9523809523809523
+Recall Macro: 0.9533651298357181
+Recall Weighted: 0.9523809523809523
+F1-measure Micro: 0.9523809523809523
+F1-measure Macro: 0.9555074555074556
+F1-measure Weighted: 0.9523895416752561
 (D) 
-Accuracy: 0.9880952380952381
-Macro-Average F1: 0.9845841784989858
-Weighted-Average F1: 0.9879600115908431
+Accuracy: 0.9523809523809523
+Macro-Average F1: 0.9555074555074556
+Weighted-Average F1: 0.9523895416752561
 
 *******************************************************************************
 
 (A)
 Model: Top-DT using gridsearch 
 Hyper-parameters changed: 
-{'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2}
+{'criterion': 'gini', 'max_depth': 10, 'min_samples_split': 2}
 (B) 
 Confusion Matrix: 
-[[41  0  1]
- [ 0 15  0]
- [ 0  0 27]]
+[[37  0  0]
+ [ 1 16  0]
+ [ 1  0 29]]
 
 (C) 
-Precision Micro: 0.9880952380952381
-Precision Macro: 0.9880952380952381
-Precision Weighted: 0.9885204081632653
-Recall Micro: 0.9880952380952381
-Recall Macro: 0.9920634920634921
-Recall Weighted: 0.9880952380952381
-F1-measure Micro: 0.9880952380952381
-F1-measure Macro: 0.9899233296823658
-F1-measure Weighted: 0.9881317477703019
+Precision Micro: 0.9761904761904762
+Precision Macro: 0.982905982905983
+Precision Weighted: 0.9774114774114774
+Recall Micro: 0.9761904761904762
+Recall Macro: 0.969281045751634
+Recall Weighted: 0.9761904761904762
+F1-measure Micro: 0.9761904761904762
+F1-measure Macro: 0.9754773425603043
+F1-measure Weighted: 0.9762224964053688
 (D) 
-Accuracy: 0.9880952380952381
-Macro-Average F1: 0.9899233296823658
-Weighted-Average F1: 0.9881317477703019
+Accuracy: 0.9761904761904762
+Macro-Average F1: 0.9754773425603043
+Weighted-Average F1: 0.9762224964053688
 
 *******************************************************************************
 
@@ -62,51 +62,51 @@ Hyper-parameters changed: None
 
 (B) 
 Confusion Matrix: 
-[[42  0  0]
- [15  0  0]
- [27  0  0]]
+[[37  0  0]
+ [17  0  0]
+ [30  0  0]]
 
 (C) 
-Precision Micro: 0.5
-Precision Macro: 0.16666666666666666
-Precision Weighted: 0.25
-Recall Micro: 0.5
+Precision Micro: 0.44047619047619047
+Precision Macro: 0.14682539682539683
+Precision Weighted: 0.19401927437641722
+Recall Micro: 0.44047619047619047
 Recall Macro: 0.3333333333333333
-Recall Weighted: 0.5
-F1-measure Micro: 0.5
-F1-measure Macro: 0.2222222222222222
-F1-measure Weighted: 0.3333333333333333
+Recall Weighted: 0.44047619047619047
+F1-measure Micro: 0.44047619047619047
+F1-measure Macro: 0.20385674931129474
+F1-measure Weighted: 0.2693821330184966
 (D) 
-Accuracy: 0.5
-Macro-Average F1: 0.2222222222222222
-Weighted-Average F1: 0.3333333333333333
+Accuracy: 0.44047619047619047
+Macro-Average F1: 0.20385674931129474
+Weighted-Average F1: 0.2693821330184966
 
 *******************************************************************************
 
 (A)
 Model: Top-MLP using gridsearch 
 Hyper-parameters changed: 
-{'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
+{'activation': 'logistic', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
 (B) 
 Confusion Matrix: 
-[[40  0  2]
- [15  0  0]
- [11  0 16]]
+[[37  0  0]
+ [17  0  0]
+ [30  0  0]]
 
 (C) 
-Precision Micro: 0.6666666666666666
-Precision Macro: 0.49831649831649827
-Precision Weighted: 0.5887445887445887
-Recall Micro: 0.6666666666666666
-Recall Macro: 0.5149911816578483
-Recall Weighted: 0.6666666666666666
-F1-measure Micro: 0.6666666666666666
-F1-measure Macro: 0.48395061728395056
-F1-measure Weighted: 0.5989417989417989
+Precision Micro: 0.44047619047619047
+Precision Macro: 0.14682539682539683
+Precision Weighted: 0.19401927437641722
+Recall Micro: 0.44047619047619047
+Recall Macro: 0.3333333333333333
+Recall Weighted: 0.44047619047619047
+F1-measure Micro: 0.44047619047619047
+F1-measure Macro: 0.20385674931129474
+F1-measure Weighted: 0.2693821330184966
 (D) 
-Accuracy: 0.6666666666666666
-Macro-Average F1: 0.48395061728395056
-Weighted-Average F1: 0.5989417989417989
+Accuracy: 0.44047619047619047
+Macro-Average F1: 0.20385674931129474
+Weighted-Average F1: 0.2693821330184966
 
 Step 6 Output: 
 
@@ -119,51 +119,51 @@ Hyper-parameters changed: None
 
 (B) 
 Confusion Matrix: 
-[[38  2  1]
- [ 0 14  0]
- [ 0  0 29]]
+[[35  1  0]
+ [ 1 13  0]
+ [ 0  0 34]]
 
 (C) 
-Precision Micro: 0.9642857142857143
-Precision Macro: 0.9472222222222223
-Precision Weighted: 0.9676587301587302
-Recall Micro: 0.9642857142857143
-Recall Macro: 0.975609756097561
-Recall Weighted: 0.9642857142857143
-F1-measure Micro: 0.9642857142857143
-F1-measure Macro: 0.9594698324155523
-F1-measure Weighted: 0.9645021335431119
+Precision Micro: 0.9761904761904762
+Precision Macro: 0.9669312169312169
+Precision Weighted: 0.9761904761904762
+Recall Micro: 0.9761904761904762
+Recall Macro: 0.9669312169312169
+Recall Weighted: 0.9761904761904762
+F1-measure Micro: 0.9761904761904762
+F1-measure Macro: 0.9669312169312169
+F1-measure Weighted: 0.9761904761904762
 (D) 
-Accuracy: 0.9642857142857143
-Macro-Average F1: 0.9594698324155523
-Weighted-Average F1: 0.9645021335431119
+Accuracy: 0.9761904761904762
+Macro-Average F1: 0.9669312169312169
+Weighted-Average F1: 0.9761904761904762
 
 *******************************************************************************
 
 (A)
 Model: Top-DT using gridsearch 
 Hyper-parameters changed: 
-{'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2}
+{'criterion': 'gini', 'max_depth': 10, 'min_samples_split': 2}
 (B) 
 Confusion Matrix: 
-[[39  2  0]
- [ 0 14  0]
- [ 0  0 29]]
+[[34  1  1]
+ [ 1 13  0]
+ [ 0  0 34]]
 
 (C) 
-Precision Micro: 0.9761904761904762
-Precision Macro: 0.9583333333333334
-Precision Weighted: 0.9791666666666666
-Recall Micro: 0.9761904761904762
-Recall Macro: 0.983739837398374
-Recall Weighted: 0.9761904761904762
-F1-measure Micro: 0.9761904761904762
-F1-measure Macro: 0.9694444444444444
-F1-measure Weighted: 0.976686507936508
+Precision Micro: 0.9642857142857143
+Precision Macro: 0.9571428571428572
+Precision Weighted: 0.9642857142857143
+Recall Micro: 0.9642857142857143
+Recall Macro: 0.9576719576719577
+Recall Weighted: 0.9642857142857143
+F1-measure Micro: 0.9642857142857143
+F1-measure Macro: 0.9572750512738265
+F1-measure Weighted: 0.9641204716220025
 (D) 
-Accuracy: 0.9761904761904762
-Macro-Average F1: 0.9694444444444444
-Weighted-Average F1: 0.976686507936508
+Accuracy: 0.9642857142857143
+Macro-Average F1: 0.9572750512738265
+Weighted-Average F1: 0.9641204716220025
 
 *******************************************************************************
 
@@ -173,51 +173,51 @@ Hyper-parameters changed: None
 
 (B) 
 Confusion Matrix: 
-[[41  0  0]
+[[36  0  0]
  [14  0  0]
- [29  0  0]]
+ [34  0  0]]
 
 (C) 
-Precision Micro: 0.4880952380952381
-Precision Macro: 0.1626984126984127
-Precision Weighted: 0.23823696145124718
-Recall Micro: 0.4880952380952381
+Precision Micro: 0.42857142857142855
+Precision Macro: 0.14285714285714285
+Precision Weighted: 0.18367346938775508
+Recall Micro: 0.42857142857142855
 Recall Macro: 0.3333333333333333
-Recall Weighted: 0.4880952380952381
-F1-measure Micro: 0.4880952380952381
-F1-measure Macro: 0.21866666666666665
-F1-measure Weighted: 0.32019047619047614
+Recall Weighted: 0.42857142857142855
+F1-measure Micro: 0.42857142857142855
+F1-measure Macro: 0.19999999999999998
+F1-measure Weighted: 0.2571428571428571
 (D) 
-Accuracy: 0.4880952380952381
-Macro-Average F1: 0.21866666666666665
-Weighted-Average F1: 0.32019047619047614
+Accuracy: 0.42857142857142855
+Macro-Average F1: 0.19999999999999998
+Weighted-Average F1: 0.2571428571428571
 
 *******************************************************************************
 
 (A)
 Model: Top-MLP using gridsearch 
 Hyper-parameters changed: 
-{'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
+{'activation': 'logistic', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
 (B) 
 Confusion Matrix: 
-[[34  0  7]
+[[36  0  0]
  [14  0  0]
- [ 3  0 26]]
+ [34  0  0]]
 
 (C) 
-Precision Micro: 0.7142857142857143
-Precision Macro: 0.48484848484848486
-Precision Weighted: 0.5974025974025974
-Recall Micro: 0.7142857142857143
-Recall Macro: 0.5752733389402859
-Recall Weighted: 0.7142857142857143
-F1-measure Micro: 0.7142857142857143
-F1-measure Macro: 0.5259467040673211
-F1-measure Weighted: 0.6503205770386696
+Precision Micro: 0.42857142857142855
+Precision Macro: 0.14285714285714285
+Precision Weighted: 0.18367346938775508
+Recall Micro: 0.42857142857142855
+Recall Macro: 0.3333333333333333
+Recall Weighted: 0.42857142857142855
+F1-measure Micro: 0.42857142857142855
+F1-measure Macro: 0.19999999999999998
+F1-measure Weighted: 0.2571428571428571
 (D) 
-Accuracy: 0.7142857142857143
-Macro-Average F1: 0.5259467040673211
-Weighted-Average F1: 0.6503205770386696
+Accuracy: 0.42857142857142855
+Macro-Average F1: 0.19999999999999998
+Weighted-Average F1: 0.2571428571428571
 
 
 Iteration 2/5*******************************************************************************
@@ -228,51 +228,51 @@ Hyper-parameters changed: None
 
 (B) 
 Confusion Matrix: 
-[[32  1  1]
- [ 1 16  0]
- [ 0  0 33]]
+[[37  0  1]
+ [ 2 15  0]
+ [ 0  0 29]]
 
 (C) 
 Precision Micro: 0.9642857142857143
-Precision Macro: 0.9604872251931075
-Precision Weighted: 0.9642751039809864
+Precision Macro: 0.9717948717948718
+Precision Weighted: 0.9652930402930403
 Recall Micro: 0.9642857142857143
-Recall Macro: 0.9607843137254902
+Recall Macro: 0.9520123839009288
 Recall Weighted: 0.9642857142857143
 F1-measure Micro: 0.9642857142857143
-F1-measure Macro: 0.9604916593503073
-F1-measure Weighted: 0.9641080312722103
+F1-measure Macro: 0.9605299361655294
+F1-measure Weighted: 0.9638744654256156
 (D) 
 Accuracy: 0.9642857142857143
-Macro-Average F1: 0.9604916593503073
-Weighted-Average F1: 0.9641080312722103
+Macro-Average F1: 0.9605299361655294
+Weighted-Average F1: 0.9638744654256156
 
 *******************************************************************************
 
 (A)
 Model: Top-DT using gridsearch 
 Hyper-parameters changed: 
-{'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2}
+{'criterion': 'gini', 'max_depth': 10, 'min_samples_split': 2}
 (B) 
 Confusion Matrix: 
-[[32  1  1]
- [ 0 17  0]
- [ 0  0 33]]
+[[38  0  0]
+ [ 2 15  0]
+ [ 0  0 29]]
 
 (C) 
 Precision Micro: 0.9761904761904762
-Precision Macro: 0.971677559912854
-Precision Weighted: 0.9772019919078743
+Precision Macro: 0.9833333333333334
+Precision Weighted: 0.9773809523809524
 Recall Micro: 0.9761904761904762
-Recall Macro: 0.9803921568627452
+Recall Macro: 0.9607843137254902
 Recall Weighted: 0.9761904761904762
 F1-measure Micro: 0.9761904761904762
-F1-measure Macro: 0.9754000559970709
-F1-measure Weighted: 0.9760886353636887
+F1-measure Macro: 0.9706196581196581
+F1-measure Weighted: 0.9757516788766788
 (D) 
 Accuracy: 0.9761904761904762
-Macro-Average F1: 0.9754000559970709
-Weighted-Average F1: 0.9760886353636887
+Macro-Average F1: 0.9706196581196581
+Weighted-Average F1: 0.9757516788766788
 
 *******************************************************************************
 
@@ -282,51 +282,51 @@ Hyper-parameters changed: None
 
 (B) 
 Confusion Matrix: 
-[[34  0  0]
+[[38  0  0]
  [17  0  0]
- [33  0  0]]
+ [29  0  0]]
 
 (C) 
-Precision Micro: 0.40476190476190477
-Precision Macro: 0.1349206349206349
-Precision Weighted: 0.16383219954648526
-Recall Micro: 0.40476190476190477
+Precision Micro: 0.4523809523809524
+Precision Macro: 0.15079365079365079
+Precision Weighted: 0.2046485260770975
+Recall Micro: 0.4523809523809524
 Recall Macro: 0.3333333333333333
-Recall Weighted: 0.40476190476190477
-F1-measure Micro: 0.40476190476190477
-F1-measure Macro: 0.192090395480226
-F1-measure Weighted: 0.23325262308313158
+Recall Weighted: 0.4523809523809524
+F1-measure Micro: 0.4523809523809524
+F1-measure Macro: 0.20765027322404372
+F1-measure Weighted: 0.2818110850897736
 (D) 
-Accuracy: 0.40476190476190477
-Macro-Average F1: 0.192090395480226
-Weighted-Average F1: 0.23325262308313158
+Accuracy: 0.4523809523809524
+Macro-Average F1: 0.20765027322404372
+Weighted-Average F1: 0.2818110850897736
 
 *******************************************************************************
 
 (A)
 Model: Top-MLP using gridsearch 
 Hyper-parameters changed: 
-{'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
+{'activation': 'logistic', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
 (B) 
 Confusion Matrix: 
-[[34  0  0]
+[[38  0  0]
  [17  0  0]
- [33  0  0]]
+ [29  0  0]]
 
 (C) 
-Precision Micro: 0.40476190476190477
-Precision Macro: 0.1349206349206349
-Precision Weighted: 0.16383219954648526
-Recall Micro: 0.40476190476190477
+Precision Micro: 0.4523809523809524
+Precision Macro: 0.15079365079365079
+Precision Weighted: 0.2046485260770975
+Recall Micro: 0.4523809523809524
 Recall Macro: 0.3333333333333333
-Recall Weighted: 0.40476190476190477
-F1-measure Micro: 0.40476190476190477
-F1-measure Macro: 0.192090395480226
-F1-measure Weighted: 0.23325262308313158
+Recall Weighted: 0.4523809523809524
+F1-measure Micro: 0.4523809523809524
+F1-measure Macro: 0.20765027322404372
+F1-measure Weighted: 0.2818110850897736
 (D) 
-Accuracy: 0.40476190476190477
-Macro-Average F1: 0.192090395480226
-Weighted-Average F1: 0.23325262308313158
+Accuracy: 0.4523809523809524
+Macro-Average F1: 0.20765027322404372
+Weighted-Average F1: 0.2818110850897736
 
 
 Iteration 3/5*******************************************************************************
@@ -337,51 +337,51 @@ Hyper-parameters changed: None
 
 (B) 
 Confusion Matrix: 
-[[38  1  0]
- [ 0 20  0]
- [ 0  0 25]]
+[[38  0  0]
+ [ 0 16  0]
+ [ 0  0 30]]
 
 (C) 
-Precision Micro: 0.9880952380952381
-Precision Macro: 0.9841269841269842
-Precision Weighted: 0.9886621315192744
-Recall Micro: 0.9880952380952381
-Recall Macro: 0.9914529914529915
-Recall Weighted: 0.9880952380952381
-F1-measure Micro: 0.9880952380952381
-F1-measure Macro: 0.9875409143701827
-F1-measure Weighted: 0.9881631144697346
+Precision Micro: 1.0
+Precision Macro: 1.0
+Precision Weighted: 1.0
+Recall Micro: 1.0
+Recall Macro: 1.0
+Recall Weighted: 1.0
+F1-measure Micro: 1.0
+F1-measure Macro: 1.0
+F1-measure Weighted: 1.0
 (D) 
-Accuracy: 0.9880952380952381
-Macro-Average F1: 0.9875409143701827
-Weighted-Average F1: 0.9881631144697346
+Accuracy: 1.0
+Macro-Average F1: 1.0
+Weighted-Average F1: 1.0
 
 *******************************************************************************
 
 (A)
 Model: Top-DT using gridsearch 
 Hyper-parameters changed: 
-{'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2}
+{'criterion': 'gini', 'max_depth': 10, 'min_samples_split': 2}
 (B) 
 Confusion Matrix: 
-[[36  3  0]
- [ 4 16  0]
- [ 0  0 25]]
+[[38  0  0]
+ [ 0 16  0]
+ [ 0  0 30]]
 
 (C) 
-Precision Micro: 0.9166666666666666
-Precision Macro: 0.9140350877192982
-Precision Weighted: 0.9159774436090226
-Recall Micro: 0.9166666666666666
-Recall Macro: 0.9076923076923077
-Recall Weighted: 0.9166666666666666
-F1-measure Micro: 0.9166666666666666
-F1-measure Macro: 0.9106350751920372
-F1-measure Weighted: 0.9161257167586282
+Precision Micro: 1.0
+Precision Macro: 1.0
+Precision Weighted: 1.0
+Recall Micro: 1.0
+Recall Macro: 1.0
+Recall Weighted: 1.0
+F1-measure Micro: 1.0
+F1-measure Macro: 1.0
+F1-measure Weighted: 1.0
 (D) 
-Accuracy: 0.9166666666666666
-Macro-Average F1: 0.9106350751920372
-Weighted-Average F1: 0.9161257167586282
+Accuracy: 1.0
+Macro-Average F1: 1.0
+Weighted-Average F1: 1.0
 
 *******************************************************************************
 
@@ -391,51 +391,51 @@ Hyper-parameters changed: None
 
 (B) 
 Confusion Matrix: 
-[[39  0  0]
- [20  0  0]
- [25  0  0]]
+[[38  0  0]
+ [16  0  0]
+ [30  0  0]]
 
 (C) 
-Precision Micro: 0.4642857142857143
-Precision Macro: 0.15476190476190477
-Precision Weighted: 0.21556122448979592
-Recall Micro: 0.4642857142857143
+Precision Micro: 0.4523809523809524
+Precision Macro: 0.15079365079365079
+Precision Weighted: 0.2046485260770975
+Recall Micro: 0.4523809523809524
 Recall Macro: 0.3333333333333333
-Recall Weighted: 0.4642857142857143
-F1-measure Micro: 0.4642857142857143
-F1-measure Macro: 0.21138211382113822
-F1-measure Weighted: 0.2944250871080139
+Recall Weighted: 0.4523809523809524
+F1-measure Micro: 0.4523809523809524
+F1-measure Macro: 0.20765027322404372
+F1-measure Weighted: 0.2818110850897736
 (D) 
-Accuracy: 0.4642857142857143
-Macro-Average F1: 0.21138211382113822
-Weighted-Average F1: 0.2944250871080139
+Accuracy: 0.4523809523809524
+Macro-Average F1: 0.20765027322404372
+Weighted-Average F1: 0.2818110850897736
 
 *******************************************************************************
 
 (A)
 Model: Top-MLP using gridsearch 
 Hyper-parameters changed: 
-{'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
+{'activation': 'logistic', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
 (B) 
 Confusion Matrix: 
-[[39  0  0]
- [20  0  0]
- [25  0  0]]
+[[38  0  0]
+ [16  0  0]
+ [30  0  0]]
 
 (C) 
-Precision Micro: 0.4642857142857143
-Precision Macro: 0.15476190476190477
-Precision Weighted: 0.21556122448979592
-Recall Micro: 0.4642857142857143
+Precision Micro: 0.4523809523809524
+Precision Macro: 0.15079365079365079
+Precision Weighted: 0.2046485260770975
+Recall Micro: 0.4523809523809524
 Recall Macro: 0.3333333333333333
-Recall Weighted: 0.4642857142857143
-F1-measure Micro: 0.4642857142857143
-F1-measure Macro: 0.21138211382113822
-F1-measure Weighted: 0.2944250871080139
+Recall Weighted: 0.4523809523809524
+F1-measure Micro: 0.4523809523809524
+F1-measure Macro: 0.20765027322404372
+F1-measure Weighted: 0.2818110850897736
 (D) 
-Accuracy: 0.4642857142857143
-Macro-Average F1: 0.21138211382113822
-Weighted-Average F1: 0.2944250871080139
+Accuracy: 0.4523809523809524
+Macro-Average F1: 0.20765027322404372
+Weighted-Average F1: 0.2818110850897736
 
 
 Iteration 4/5*******************************************************************************
@@ -446,51 +446,51 @@ Hyper-parameters changed: None
 
 (B) 
 Confusion Matrix: 
-[[37  1  1]
- [ 0 17  0]
- [ 0  0 28]]
+[[37  1  0]
+ [ 1 17  0]
+ [ 0  1 27]]
 
 (C) 
-Precision Micro: 0.9761904761904762
-Precision Macro: 0.9699872286079182
-Precision Weighted: 0.9772623608830505
-Recall Micro: 0.9761904761904762
-Recall Macro: 0.982905982905983
-Recall Weighted: 0.9761904761904762
-F1-measure Micro: 0.9761904761904762
-F1-measure Macro: 0.9758563074352548
-F1-measure Weighted: 0.9761516887456736
+Precision Micro: 0.9642857142857143
+Precision Macro: 0.956140350877193
+Precision Weighted: 0.9655388471177945
+Recall Micro: 0.9642857142857143
+Recall Macro: 0.9608047897521582
+Recall Weighted: 0.9642857142857143
+F1-measure Micro: 0.9642857142857143
+F1-measure Macro: 0.9581404370878056
+F1-measure Weighted: 0.9646601146601147
 (D) 
-Accuracy: 0.9761904761904762
-Macro-Average F1: 0.9758563074352548
-Weighted-Average F1: 0.9761516887456736
+Accuracy: 0.9642857142857143
+Macro-Average F1: 0.9581404370878056
+Weighted-Average F1: 0.9646601146601147
 
 *******************************************************************************
 
 (A)
 Model: Top-DT using gridsearch 
 Hyper-parameters changed: 
-{'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2}
+{'criterion': 'gini', 'max_depth': 10, 'min_samples_split': 2}
 (B) 
 Confusion Matrix: 
-[[36  2  1]
- [ 0 17  0]
- [ 0  0 28]]
+[[38  0  0]
+ [ 1 17  0]
+ [ 1  0 27]]
 
 (C) 
-Precision Micro: 0.9642857142857143
-Precision Macro: 0.9534180278281913
-Precision Weighted: 0.9672024889810734
-Recall Micro: 0.9642857142857143
-Recall Macro: 0.9743589743589745
-Recall Weighted: 0.9642857142857143
-F1-measure Micro: 0.9642857142857143
-F1-measure Macro: 0.9623001949317739
-F1-measure Weighted: 0.9643372319688109
+Precision Micro: 0.9761904761904762
+Precision Macro: 0.9833333333333334
+Precision Weighted: 0.9773809523809524
+Recall Micro: 0.9761904761904762
+Recall Macro: 0.9695767195767195
+Recall Weighted: 0.9761904761904762
+F1-measure Micro: 0.9761904761904762
+F1-measure Macro: 0.9758685758685758
+F1-measure Weighted: 0.9762174333602903
 (D) 
-Accuracy: 0.9642857142857143
-Macro-Average F1: 0.9623001949317739
-Weighted-Average F1: 0.9643372319688109
+Accuracy: 0.9761904761904762
+Macro-Average F1: 0.9758685758685758
+Weighted-Average F1: 0.9762174333602903
 
 *******************************************************************************
 
@@ -500,51 +500,51 @@ Hyper-parameters changed: None
 
 (B) 
 Confusion Matrix: 
-[[39  0  0]
- [17  0  0]
+[[38  0  0]
+ [18  0  0]
  [28  0  0]]
 
 (C) 
-Precision Micro: 0.4642857142857143
-Precision Macro: 0.15476190476190477
-Precision Weighted: 0.21556122448979592
-Recall Micro: 0.4642857142857143
+Precision Micro: 0.4523809523809524
+Precision Macro: 0.15079365079365079
+Precision Weighted: 0.2046485260770975
+Recall Micro: 0.4523809523809524
 Recall Macro: 0.3333333333333333
-Recall Weighted: 0.4642857142857143
-F1-measure Micro: 0.4642857142857143
-F1-measure Macro: 0.21138211382113822
-F1-measure Weighted: 0.2944250871080139
+Recall Weighted: 0.4523809523809524
+F1-measure Micro: 0.4523809523809524
+F1-measure Macro: 0.20765027322404372
+F1-measure Weighted: 0.2818110850897736
 (D) 
-Accuracy: 0.4642857142857143
-Macro-Average F1: 0.21138211382113822
-Weighted-Average F1: 0.2944250871080139
+Accuracy: 0.4523809523809524
+Macro-Average F1: 0.20765027322404372
+Weighted-Average F1: 0.2818110850897736
 
 *******************************************************************************
 
 (A)
 Model: Top-MLP using gridsearch 
 Hyper-parameters changed: 
-{'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
+{'activation': 'logistic', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
 (B) 
 Confusion Matrix: 
-[[28  5  6]
- [ 2 15  0]
- [ 9  0 19]]
+[[38  0  0]
+ [18  0  0]
+ [28  0  0]]
 
 (C) 
-Precision Micro: 0.7380952380952381
-Precision Macro: 0.7426495726495727
-Precision Weighted: 0.738452380952381
-Recall Micro: 0.7380952380952381
-Recall Macro: 0.759624362565539
-Recall Weighted: 0.7380952380952381
-F1-measure Micro: 0.7380952380952381
-F1-measure Macro: 0.7485802202783335
-F1-measure Weighted: 0.7364197081178213
+Precision Micro: 0.4523809523809524
+Precision Macro: 0.15079365079365079
+Precision Weighted: 0.2046485260770975
+Recall Micro: 0.4523809523809524
+Recall Macro: 0.3333333333333333
+Recall Weighted: 0.4523809523809524
+F1-measure Micro: 0.4523809523809524
+F1-measure Macro: 0.20765027322404372
+F1-measure Weighted: 0.2818110850897736
 (D) 
-Accuracy: 0.7380952380952381
-Macro-Average F1: 0.7485802202783335
-Weighted-Average F1: 0.7364197081178213
+Accuracy: 0.4523809523809524
+Macro-Average F1: 0.20765027322404372
+Weighted-Average F1: 0.2818110850897736
 
 
 Iteration 5/5*******************************************************************************
@@ -555,51 +555,51 @@ Hyper-parameters changed: None
 
 (B) 
 Confusion Matrix: 
-[[35  1  0]
- [ 2 21  0]
- [ 0  0 25]]
+[[34  0  0]
+ [ 0 19  0]
+ [ 1  0 30]]
 
 (C) 
-Precision Micro: 0.9642857142857143
-Precision Macro: 0.9668304668304669
-Precision Weighted: 0.9643880893880895
-Recall Micro: 0.9642857142857143
-Recall Macro: 0.9617552334943639
-Recall Weighted: 0.9642857142857143
-F1-measure Micro: 0.9642857142857143
-F1-measure Macro: 0.9640791476407915
-F1-measure Weighted: 0.9641335072841922
+Precision Micro: 0.9880952380952381
+Precision Macro: 0.9904761904761905
+Precision Weighted: 0.9884353741496599
+Recall Micro: 0.9880952380952381
+Recall Macro: 0.989247311827957
+Recall Weighted: 0.9880952380952381
+F1-measure Micro: 0.9880952380952381
+F1-measure Macro: 0.989704601251287
+F1-measure Weighted: 0.9880839244702395
 (D) 
-Accuracy: 0.9642857142857143
-Macro-Average F1: 0.9640791476407915
-Weighted-Average F1: 0.9641335072841922
+Accuracy: 0.9880952380952381
+Macro-Average F1: 0.989704601251287
+Weighted-Average F1: 0.9880839244702395
 
 *******************************************************************************
 
 (A)
 Model: Top-DT using gridsearch 
 Hyper-parameters changed: 
-{'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2}
+{'criterion': 'gini', 'max_depth': 10, 'min_samples_split': 2}
 (B) 
 Confusion Matrix: 
-[[34  2  0]
- [ 0 23  0]
- [ 0  0 25]]
+[[34  0  0]
+ [ 1 18  0]
+ [ 1  0 30]]
 
 (C) 
 Precision Micro: 0.9761904761904762
-Precision Macro: 0.9733333333333333
-Precision Weighted: 0.978095238095238
+Precision Macro: 0.9814814814814815
+Precision Weighted: 0.9775132275132276
 Recall Micro: 0.9761904761904762
-Recall Macro: 0.9814814814814815
+Recall Macro: 0.9717034521788341
 Recall Weighted: 0.9761904761904762
 F1-measure Micro: 0.9761904761904762
-F1-measure Macro: 0.9765873015873016
-F1-measure Weighted: 0.9763463718820861
+F1-measure Macro: 0.9760027005928645
+F1-measure Weighted: 0.9762721570684099
 (D) 
 Accuracy: 0.9761904761904762
-Macro-Average F1: 0.9765873015873016
-Weighted-Average F1: 0.9763463718820861
+Macro-Average F1: 0.9760027005928645
+Weighted-Average F1: 0.9762721570684099
 
 *******************************************************************************
 
@@ -609,97 +609,97 @@ Hyper-parameters changed: None
 
 (B) 
 Confusion Matrix: 
-[[36  0  0]
- [23  0  0]
- [25  0  0]]
+[[34  0  0]
+ [19  0  0]
+ [31  0  0]]
 
 (C) 
-Precision Micro: 0.42857142857142855
-Precision Macro: 0.14285714285714285
-Precision Weighted: 0.18367346938775508
-Recall Micro: 0.42857142857142855
+Precision Micro: 0.40476190476190477
+Precision Macro: 0.1349206349206349
+Precision Weighted: 0.16383219954648526
+Recall Micro: 0.40476190476190477
 Recall Macro: 0.3333333333333333
-Recall Weighted: 0.42857142857142855
-F1-measure Micro: 0.42857142857142855
-F1-measure Macro: 0.19999999999999998
-F1-measure Weighted: 0.2571428571428571
+Recall Weighted: 0.40476190476190477
+F1-measure Micro: 0.40476190476190477
+F1-measure Macro: 0.192090395480226
+F1-measure Weighted: 0.23325262308313158
 (D) 
-Accuracy: 0.42857142857142855
-Macro-Average F1: 0.19999999999999998
-Weighted-Average F1: 0.2571428571428571
+Accuracy: 0.40476190476190477
+Macro-Average F1: 0.192090395480226
+Weighted-Average F1: 0.23325262308313158
 
 *******************************************************************************
 
 (A)
 Model: Top-MLP using gridsearch 
 Hyper-parameters changed: 
-{'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
+{'activation': 'logistic', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
 (B) 
 Confusion Matrix: 
-[[36  0  0]
- [23  0  0]
- [25  0  0]]
+[[34  0  0]
+ [19  0  0]
+ [31  0  0]]
 
 (C) 
-Precision Micro: 0.42857142857142855
-Precision Macro: 0.14285714285714285
-Precision Weighted: 0.18367346938775508
-Recall Micro: 0.42857142857142855
+Precision Micro: 0.40476190476190477
+Precision Macro: 0.1349206349206349
+Precision Weighted: 0.16383219954648526
+Recall Micro: 0.40476190476190477
 Recall Macro: 0.3333333333333333
-Recall Weighted: 0.42857142857142855
-F1-measure Micro: 0.42857142857142855
-F1-measure Macro: 0.19999999999999998
-F1-measure Weighted: 0.2571428571428571
+Recall Weighted: 0.40476190476190477
+F1-measure Micro: 0.40476190476190477
+F1-measure Macro: 0.192090395480226
+F1-measure Weighted: 0.23325262308313158
 (D) 
-Accuracy: 0.42857142857142855
-Macro-Average F1: 0.19999999999999998
-Weighted-Average F1: 0.2571428571428571
+Accuracy: 0.40476190476190477
+Macro-Average F1: 0.192090395480226
+Weighted-Average F1: 0.23325262308313158
 
 
 
 Model: Base-DT
-Average Accuracy: 0.9714, Variance: 0.0001
+Average Accuracy: 0.9786, Variance: 0.0002
 
 
 Model: Top-DT
-Average Accuracy: 0.9619, Variance: 0.0005
+Average Accuracy: 0.9786, Variance: 0.0001
 
 
 Model: Base-MLP
-Average Accuracy: 0.4500, Variance: 0.0009
+Average Accuracy: 0.4381, Variance: 0.0004
 
 
 Model: Top-MLP
-Average Accuracy: 0.5500, Variance: 0.0211
+Average Accuracy: 0.4381, Variance: 0.0004
 
 
 Model: Base-DT
-Average Macro Average F1: 0.9695, Variance: 0.0001
+Average Macro Average F1: 0.9751, Variance: 0.0003
 
 
 Model: Top-DT
-Average Macro Average F1: 0.9589, Variance: 0.0006
+Average Macro Average F1: 0.9760, Variance: 0.0002
 
 
 Model: Base-MLP
-Average Macro Average F1: 0.2067, Variance: 0.0001
+Average Macro Average F1: 0.2030, Variance: 0.0000
 
 
 Model: Top-MLP
-Average Macro Average F1: 0.3756, Variance: 0.0506
+Average Macro Average F1: 0.2030, Variance: 0.0000
 
 
 Model: Base-DT
-Average Weighted Average F1: 0.9714, Variance: 0.0001
+Average Weighted Average F1: 0.9786, Variance: 0.0002
 
 
 Model: Top-DT
-Average Weighted Average F1: 0.9619, Variance: 0.0005
+Average Weighted Average F1: 0.9785, Variance: 0.0001
 
 
 Model: Base-MLP
-Average Weighted Average F1: 0.2799, Variance: 0.0009
+Average Weighted Average F1: 0.2672, Variance: 0.0004
 
 
 Model: Top-MLP
-Average Weighted Average F1: 0.4343, Variance: 0.0459
+Average Weighted Average F1: 0.2672, Variance: 0.0004
