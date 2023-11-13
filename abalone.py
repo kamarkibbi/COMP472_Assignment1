@@ -122,24 +122,21 @@ best_estimator_top_dt = grid_search.best_estimator_
 
 y_pred_top_dt = best_estimator_top_dt.predict(X_test)
 
-#
-# def visualize_decision_tree(dt_model, X_train, y_train):
-#     plt.figure(figsize=(30, 10))
-#     plot_tree(
-#         dt_model,
-#         feature_names=X_train.columns.tolist(),
-#         class_names=y_train['Type'].unique().tolist(),
-#         filled=True,
-#         fontsize=3
-#     )
-#     plt.show()
-#
-#
-# # Visualize the base Decision Tree
-# visualize_decision_tree(base_dt, abalone_df_X_train, abalone_df_y_train)
-#
-# # Visualize the best Decision Tree found using GridSearchCV
-# visualize_decision_tree(best_estimator, abalone_df_X_train, abalone_df_y_train)
+
+def visualize_decision_tree(dt_model, X_train, y_train):
+    plt.figure(figsize=(12, 8))
+    plot_tree(dt_model,
+              feature_names=X_train.columns.tolist(),
+              class_names=y_train['Type'].unique().tolist(),
+              filled=True,
+              fontsize=3
+              )
+    plt.show()
+
+# Visualize the base Decision Tree
+visualize_decision_tree(base_dt, X_train,y_train)
+# Visualize the best Decision Tree found using GridSearchCV
+visualize_decision_tree(best_estimator_top_dt, X_train, y_train)
 
 '''Step 4c'''
 # Create and fit a Multi-Layer Perceptron (MLP) classifier with default parameters
@@ -180,17 +177,29 @@ mlp_best_estimator = mlp_grid_search.best_estimator_
 # Test the hot-encoded penguins dataset
 y_pred_top_mlp = mlp_best_estimator.predict(X_test)
 
+
+'''Step 5'''
+with open('abalone.txt', 'w') as f:
+    f.write("Single Run Output for part 5: \n\n")
 # write all the stats to a file
 write_to_file('abalone.txt', y_test, y_pred_base_dt, y_pred_top_dt, y_pred_base_mlp, y_pred_top_mlp,
               best_params_top_dt, mlp_best_params)
 
 
-# Redo steps 4 & 5, 5 times for each model and append in the performance files
+'''Step 6'''
+#Redo steps 4 & 5, 5 times for each model and append in the performance files
+with open('abalone.txt', 'a') as f:
+    f.write("Step 6 Output: \n\n")
 num_iterations = 5
-accuracy_results = {'base_dt': [], 'top_dt': [], 'base_mlp': [], 'top_mlp': []}
+accuracy_results = {'base_dt_Acc': [], 'top_dt_Acc': [], 'base_mlp_Acc': [], 'top_mlp_Acc': []}
+macro_f1_results = {'base_dt_Macf1': [], 'top_dt_Macf1': [], 'base_mlp_Macf1': [], 'top_mlp_Macf1': []}
+weighted_avg_f1_results = {'base_dt_Wavgf1': [], 'top_dt_Wavgf1': [], 'base_mlp_Wavgf1': [], 'top_mlp_Wavgf1': []}
 
 for i in range(num_iterations):
     print(f"\nIteration {i + 1}/{num_iterations}")
+
+    with open('abalone.txt', 'a') as f:
+        f.write(f"\nIteration {i + 1}/{num_iterations}")
 
     # Split the data
     X_train, X_test, y_train, y_test = train_test_split(df_X, df_y)
@@ -198,32 +207,80 @@ for i in range(num_iterations):
     # Base Decision Tree
     base_dt.fit(X_train, y_train)
     y_pred_base_dt = base_dt.predict(X_test)
-    accuracy_results['base_dt'].append(accuracy_score(y_test, y_pred_base_dt))
+    accuracy_results['base_dt_Acc'].append(accuracy_score(y_test, y_pred_base_dt))
+    macro_f1_results['base_dt_Macf1'].append(metrics.f1_score(y_test,y_pred_base_dt,average="macro"))
+    weighted_avg_f1_results['base_dt_Wavgf1'].append(metrics.f1_score(y_test, y_pred_base_dt, average="weighted"))
 
     # Top Decision Tree
     grid_search.fit(X_train, y_train)
     best_estimator_dt = grid_search.best_estimator_
     y_pred_top_dt = best_estimator_dt.predict(X_test)
-    accuracy_results['top_dt'].append(accuracy_score(y_test, y_pred_top_dt))
+    accuracy_results['top_dt_Acc'].append(accuracy_score(y_test, y_pred_top_dt))
+    macro_f1_results['top_dt_Macf1'].append(metrics.f1_score(y_test,y_pred_top_dt,average="macro"))
+    weighted_avg_f1_results['top_dt_Wavgf1'].append(metrics.f1_score(y_test, y_pred_top_dt, average="weighted"))
 
     # Base MLP
     y_train = y_train.values.ravel()
     y_test = y_test.values.ravel()
     base_mlp.fit(X_train, y_train)
     y_pred_base_mlp = base_mlp.predict(X_test)
-    accuracy_results['base_mlp'].append(accuracy_score(y_test, y_pred_base_mlp))
+    accuracy_results['base_mlp_Acc'].append(accuracy_score(y_test, y_pred_base_mlp))
+    macro_f1_results['base_mlp_Macf1'].append(metrics.f1_score(y_test,y_pred_base_mlp,average="macro"))
+    weighted_avg_f1_results['base_mlp_Wavgf1'].append(metrics.f1_score(y_test, y_pred_base_mlp, average="weighted"))
 
     # Top MLP
     mlp_grid_search.fit(X_train, y_train)
     mlp_best_estimator = mlp_grid_search.best_estimator_
     y_pred_top_mlp = mlp_best_estimator.predict(X_test)
-    accuracy_results['top_mlp'].append(accuracy_score(y_test, y_pred_top_mlp))
+    accuracy_results['top_mlp_Acc'].append(accuracy_score(y_test, y_pred_top_mlp))
+    macro_f1_results['top_mlp_Macf1'].append(metrics.f1_score(y_test,y_pred_top_mlp,average="macro"))
+    weighted_avg_f1_results['top_mlp_Wavgf1'].append(metrics.f1_score(y_test, y_pred_top_mlp, average="weighted"))
+
+    write_to_file('abalone.txt', y_test, y_pred_base_dt, y_pred_top_dt, y_pred_base_mlp, y_pred_top_mlp, 
+                  best_params_top_dt, mlp_best_params)
 
 # Calculate average and variance for each model
-for model in ['base_dt', 'top_dt', 'base_mlp', 'top_mlp']:
+for model in ['base_dt_Acc', 'top_dt_Acc', 'base_mlp_Acc', 'top_mlp_Acc']:
     avg_accuracy = np.mean(accuracy_results[model])
     var_accuracy = np.var(accuracy_results[model])
 
-    with open('abalone_performance.txt', 'a') as f:
-        f.write(f"\n\nModel: {model}\n")
+    with open('abalone.txt', 'a') as f:
+        if(model=='base_dt_Acc'):
+            f.write(f"\n\nModel: Base-DT\n")
+        elif (model=='top_dt_Acc'):
+            f.write(f"\n\nModel: Top-DT\n")
+        elif (model=='base_mlp_Acc'):
+            f.write(f"\n\nModel: Base-MLP\n")
+        else:
+            f.write(f"\n\nModel: Top-MLP\n")
         f.write(f"Average Accuracy: {avg_accuracy:.4f}, Variance: {var_accuracy:.4f}\n")
+
+for model in ['base_dt_Macf1', 'top_dt_Macf1', 'base_mlp_Macf1', 'top_mlp_Macf1']:
+    avg_Macf1 = np.mean(macro_f1_results[model])
+    var_Macf1 = np.var(macro_f1_results[model])
+
+    with open('abalone.txt', 'a') as f:
+        if(model=='base_dt_Macf1'):
+            f.write(f"\n\nModel: Base-DT\n")
+        elif (model=='top_dt_Macf1'):
+            f.write(f"\n\nModel: Top-DT\n")
+        elif (model=='base_mlp_Macf1'):
+            f.write(f"\n\nModel: Base-MLP\n")
+        else:
+            f.write(f"\n\nModel: Top-MLP\n")
+        f.write(f"Average Macro Average F1: {avg_Macf1:.4f}, Variance: {var_Macf1:.4f}\n")
+
+for model in ['base_dt_Wavgf1', 'top_dt_Wavgf1', 'base_mlp_Wavgf1', 'top_mlp_Wavgf1']:
+    avg_Wavgf1 = np.mean(weighted_avg_f1_results[model])
+    var_Wavgf1 = np.var(weighted_avg_f1_results[model])
+
+    with open('abalone.txt', 'a') as f:
+        if(model=='base_dt_Wavgf1'):
+            f.write(f"\n\nModel: Base-DT\n")
+        elif (model=='top_dt_Wavgf1'):
+            f.write(f"\n\nModel: Top-DT\n")
+        elif (model=='base_mlp_Wavgf1'):
+            f.write(f"\n\nModel: Base-MLP\n")
+        else:
+            f.write(f"\n\nModel: Top-MLP\n")
+        f.write(f"Average Weighted Average F1: {avg_Wavgf1:.4f}, Variance: {var_Wavgf1:.4f}\n")
